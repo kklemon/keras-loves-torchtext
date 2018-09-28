@@ -1,0 +1,10 @@
+.data
+.vector_cache
+.idea
+.venv
+
+__pycache__
+
+build/
+dist/
+keras_loves_torchtext.egg-info/
