@@ -28,7 +28,9 @@ train_it, test_it = data.BucketIterator.splits([train_set, test_set], [batch_siz
 text_field.build_vocab(train_set, max_size=top_words)
 label_field.build_vocab(train_set)
 
-print('Vocabulary contains {} words'.format(len(text_field.vocab)))
+vocab_size = len(text_field.vocab)
+
+print('Vocabulary contains {} words'.format(vocab_size))
 
 train_data, test_data = WrapIterator.wraps([train_it,
                                             test_it], ['text'], ['label'], permute={'text': (1, 0)})
@@ -36,7 +38,7 @@ train_data, test_data = WrapIterator.wraps([train_it,
 print('Building model')
 
 model = Sequential()
-model.add(Embedding(top_words, embedding_dim))
+model.add(Embedding(vocab_size, embedding_dim))
 model.add(LSTM(lstm_units))
 # Actually the labels are binary but we will treat it as a categorical problem for seek of generality
 model.add(Dense(len(label_field.vocab), activation='softmax'))
