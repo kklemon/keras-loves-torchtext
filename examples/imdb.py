@@ -19,7 +19,7 @@ print('Loading and preparing data')
 
 text_field = data.Field(fix_length=seq_length)
 # `unk_token` should be set to None if the label data is expected to be categorical and to have no inconsistencies
-# like classes in the test set that didn't appear in the training set.
+# as for example classes in the test set that don't appear in the training set.
 label_field = data.Field(sequential=False, unk_token=None)
 
 train_set, test_set = datasets.IMDB.splits(text_field, label_field)

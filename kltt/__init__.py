@@ -60,7 +60,8 @@ class WrapIterator(object):
         return wrappers
 
     def _process(self, tensor, field_name):
-        tensor = tensor.permute(*self.permute[field_name]) if field_name in self.permute else tensor
+        if self.permute and field_name in self.permute:
+            tensor = tensor.permute(*self.permute[field_name])
         return tensor.cpu().numpy()
 
     def __iter__(self):
