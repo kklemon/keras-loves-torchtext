@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-with open('README.md', 'r') as fp:
+with open('README.md', 'r', encoding='utf8') as fp:
     long_description = fp.read()
 
 setup(
