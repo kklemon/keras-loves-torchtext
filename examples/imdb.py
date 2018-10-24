@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 from keras.layers import *
 from keras.models import *
 
@@ -20,7 +20,7 @@ print('Loading and preparing data')
 text_field = data.Field(fix_length=seq_length)
 # `unk_token` should be set to None if the label data is expected to be categorical and to have no inconsistencies
 # as for example classes in the test set that don't appear in the training set.
-label_field = data.Field(sequential=False, unk_token=None)
+label_field = data.Field(sequential=False, unk_token=None, is_target=True)
 
 train_set, test_set = datasets.IMDB.splits(text_field, label_field)
 train_it, test_it = data.BucketIterator.splits([train_set, test_set], [batch_size] * 2, repeat=True)
@@ -32,8 +32,7 @@ vocab_size = len(text_field.vocab)
 
 print('Vocabulary contains {} words'.format(vocab_size))
 
-train_data, test_data = WrapIterator.wraps([train_it,
-                                            test_it], ['text'], ['label'], permute={'text': (1, 0)})
+train_data, test_data = WrapIterator.wraps([train_it, test_it], permute={'text': (1, 0)})
 
 print('Building model')
 
