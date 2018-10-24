@@ -13,6 +13,6 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/kklemon/keras-loves-torchtext",
     license='BSD',
-    packages=find_packages(exclude=('test',)),
+    packages=find_packages(exclude=('test', 'examples')),
     zip_safe=True
 )
